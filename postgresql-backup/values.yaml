@@ -1,0 +1,19 @@
+# postgres backup with pghoard
+user: repuser
+password: reppassword
+storage_type: local
+directory: /backup/
+cleanupAfterDays: 5
+
+# Use nfs mount directly without pv / pvc
+raw_nfs:
+  enabled: false
+  path: /PRD_LNX_K8S01_003
+  server: nfs.local.dmz
+  readonly: false
+
+# Use claim for backups. `raw_nfs.enabled` should be false
+persistence:
+  enabled: false
+  storageClassName: manual
+  storageSize: 10Gi

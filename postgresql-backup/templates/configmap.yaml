@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "postgresql-backup.fullname" . }}-initdb
+  labels:
+    app: {{ template "postgresql-backup.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  00_init.sh: |
+    echo "run init script"
+  01_add_backup_user_hba_conf.sh: |
+    #!/bin/bash
+    echo "run pghoard script"
+    set -e
+    echo "create backup user..."
+    psql -d postgres -c "CREATE USER {{ .Values.user }} PASSWORD '{{ .Values.password }}' REPLICATION;"
+    echo "modify pg_hba.conf..."
+    echo "host replication repuser 172.0.0.1/8 trust" >> /var/lib/postgresql/data/pgdata/pg_hba.conf

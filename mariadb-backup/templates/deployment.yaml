@@ -1,0 +1,66 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "mariadb-backup.fullname" . }}
+  labels:
+    app: {{ template "mariadb-backup.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "mariadb-backup.fullname" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Release.Name }}
+        image: deitch/mysql-backup
+        env:
+        - name: DB_DUMP_FREQ
+          value: {{ .Values.freq | quote }}
+        - name: DB_DUMP_BEGIN
+          value: {{ .Values.begin | quote }}
+        - name: DB_DUMP_TARGET
+          value: {{ printf "%s%s" .Values.directory .Release.Namespace | quote }}
+        - name: DB_SERVER
+          value: "{{ template "mariadb-backup.fullname" . }}"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: "{{ template "mariadb-backup.fullname" . }}"
+              key: mariadb-root-password
+        volumeMounts:
+        - name: {{ template "mariadb-backup.fullname" . }}-storage
+          mountPath: {{ .Values.directory }}
+        - name: "{{ template "mariadb-backup.fullname" . }}-backupconfig-volume"
+          mountPath: /scripts.d/post-backup/clenup-old-files.sh
+          subPath: clenup-old-files.sh
+      restartPolicy: Always
+      volumes:
+      - name: "{{ template "mariadb-backup.fullname" . }}-backupconfig-volume"
+        configMap:
+          name: "{{ template "mariadb-backup.fullname" . }}-backupconfig"
+          defaultMode: 0640
+      {{- if .Values.raw_nfs.enabled }}
+      - name: {{ template "mariadb-backup.fullname" . }}-storage
+        nfs:
+          path: {{ .Values.raw_nfs.path }}
+          server: {{ .Values.raw_nfs.server }}
+          readOnly: {{ .Values.raw_nfs.readonly }}
+      {{- else }}
+      - name: {{ template "mariadb-backup.fullname" . }}-storage
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "mariadb-backup.fullname" . }}-claim
+      {{- else }}
+        emptyDir: {}
+      {{- end -}}
+      {{- end -}}

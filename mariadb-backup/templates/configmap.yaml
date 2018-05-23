@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "mariadb-backup.fullname" . }}
+  labels:
+    app: {{ template "mariadb-backup.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  clenup-old-files.sh: |
+    #!/bin/bash
+
+    find {{ .Values.directory }} -type f -mindepth 1 -mtime +{{ .Values.deleteOldFilesAfter }} -delete
