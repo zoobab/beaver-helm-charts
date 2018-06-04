@@ -2,3 +2,6 @@ ingress:
   enabled: true
   class: ""
   domain: paas-prod01.local.dmz
+
+kong:
+  postgresql: {}

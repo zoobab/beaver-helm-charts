@@ -17,3 +17,6 @@ persistence:
   enabled: false
   storageClassName: manual
   storageSize: 10Gi
+
+postgresql:
+  service: {}
