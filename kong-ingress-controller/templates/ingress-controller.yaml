@@ -9,7 +9,6 @@ metadata:
     chart: {{ template "kong-ingress-controller.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-
 spec:
   type: NodePort
   ports:
@@ -136,8 +135,8 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
-        image: "{{ .Values.kong-ingress.image.repository }}:{{ .Values.kong-ingress.image.tag }}"
-        imagePullPolicy: {{ .Values.kong-ingress.image.pullPolicy }}
+        image: "{{ .Values.ingress.image.repository }}:{{ .Values.ingress.image.tag }}"
+        imagePullPolicy: {{ .Values.ingress.image.pullPolicy }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
