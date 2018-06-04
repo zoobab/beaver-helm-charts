@@ -1,0 +1,172 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "kong-ingress-controller.fullname" . }}-ingress
+  namespace: {{ .Values.Namespace }}
+  labels:
+    app: {{ template "kong-ingress-controller.name" . }}
+    chart: {{ template "kong-ingress-controller.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+
+spec:
+  type: NodePort
+  ports:
+  - name: kong-admin
+    port: 8001
+    targetPort: 8001
+    protocol: TCP
+  selector:
+    app: {{ template "kong-ingress-controller.name" . }}-ingress
+    release: {{ .Release.Name }}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "kong-ingress-controller.fullname" . }}-ingress
+  namespace: {{ .Values.Namespace }}
+  labels:
+    app: {{ template "kong-ingress-controller.name" . }}-ingress
+    release: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "kong-ingress-controller.name" . }}-ingress
+      release: {{ .Release.Name }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        # the returned metrics are related to the kong ingress controller not kong itself
+        prometheus.io/port: "10254"
+        prometheus.io/scrape: "true"
+      labels:
+        app: {{ template "kong-ingress-controller.name" . }}-ingress
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ template "kong-ingress-controller.fullname" . }}
+      initContainers:
+      - name: {{ .Chart.Name }}-migration
+        image: "{{ .Values.kong.image.repository }}:{{ .Values.kong.image.tag }}"
+        imagePullPolicy: {{ .Values.kong.image.pullPolicy }}
+        env:
+          - name: KONG_PG_USER
+            value: {{ .Values.postgres.user }}
+          - name: KONG_PG_PASSWORD
+            value: {{ .Values.postgres.password }}
+          - name: KONG_PG_HOST
+            value: {{ template "kong-ingress-controller.name" . }}-postgres
+        command: [ "/bin/sh", "-c", "kong migrations up" ]
+      containers:
+      - name: {{ .Chart.Name }}-admin-api
+        image: "{{ .Values.kong.image.repository }}:{{ .Values.kong.image.tag }}"
+        imagePullPolicy: {{ .Values.kong.image.pullPolicy }}
+        env:
+          - name: KONG_PG_USER
+            value: {{ .Values.postgres.user }}
+          - name: KONG_PG_PASSWORD
+            value: {{ .Values.postgres.password }}
+          - name: KONG_PG_HOST
+            value: {{ template "kong-ingress-controller.name" . }}-postgres
+          - name: KONG_ADMIN_ACCESS_LOG
+            value: /dev/stdout
+          - name: KONG_ADMIN_ERROR_LOG
+            value: /dev/stderr
+          - name: KONG_ADMIN_LISTEN
+            value: 0.0.0.0:8001
+          - name: KONG_PROXY_LISTEN
+            value: 'off'
+        ports:
+        - name: kong-admin
+          containerPort: 8001
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /status
+            port: 8001
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /status
+            port: 8001
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+      - name: ingress-controller
+        args:
+        - /kong-ingress-controller
+        # the kong URL points to the kong admin api server
+        - --kong-url=http://localhost:8001
+        # the default service is the kong proxy service
+        - --default-backend-service=kong/kong-proxy
+        # Service from were we extract the IP address/es to use in Ingress status
+        - --publish-service=kong/kong-proxy
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: "{{ .Values.kong-ingress.image.repository }}:{{ .Values.kong-ingress.image.tag }}"
+        imagePullPolicy: {{ .Values.kong-ingress.image.pullPolicy }}
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 10254
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 10254
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

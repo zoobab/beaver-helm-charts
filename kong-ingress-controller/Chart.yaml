@@ -1,0 +1,10 @@
+apiVersion: v1
+name: kong-ingress-controller
+version: 0.0.4
+appVersion: 1.0
+description: Kong Ingress controller
+keywords:
+- kong
+- ingress
+home: https://github.com/Kong/kubernetes-ingress-controller/
+icon: https://s3.amazonaws.com/downloads.kong/universe/assets/icon-kong-inc-large.png
