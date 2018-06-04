@@ -1,0 +1,8 @@
+---
+stages:
+  - test
+
+lint:
+  stage: test
+  script:
+    - find . -type d -depth 1 -not -path ./.git -exec helm lint {} \;
