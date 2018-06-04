@@ -7,4 +7,4 @@ stages:
 lint:
   stage: test
   script:
-    - find . -type d -maxdepth 1 -not -path ./.git -exec helm lint {} \;
+    - find . -type d -maxdepth 1 -not -path ./.git -print0 | xargs -0 -n 1 helm lint
