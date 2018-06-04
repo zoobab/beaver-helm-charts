@@ -1,4 +1,6 @@
 ---
+image: lachlanevenson/k8s-helm:latest
+
 stages:
   - test
 
