@@ -1,0 +1,42 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "konga.fullname" . }}
+  labels:
+    app: "{{ template "konga.name" . }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "konga.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ template "konga.name" . }}
+        image: 'pantsel/konga'
+        env:
+        - name: DB_ADAPTER
+          value: "postgres"
+        - name: DB_DATABASE
+          value: "postgres"
+        - name: DB_HOST
+          value: {{ .Values.kong.postgresql.fullname | quote }}
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.kong.postgresql.fullname | quote }}
+              key: postgres-password
+        - name: DB_USER
+          value: "kong"
+        - name: KONGA_BACKEND_PORT
+          value: "8080"
+        - name: NODE_ENV
+          value: "development"
+        ports:
+        - name: kong-ui
+          containerPort: 8080

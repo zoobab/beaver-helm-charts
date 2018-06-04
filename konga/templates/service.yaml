@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "konga.fullname" . }}
+  chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  release: "{{ .Release.Name }}"
+  heritage: "{{ .Release.Service }}"
+spec:
+  type: ClusterIP
+  ports:
+  - name: {{ template "konga.name" . }}
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: {{ template "konga.name" . }}

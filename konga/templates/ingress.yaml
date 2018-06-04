@@ -1,0 +1,19 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "konga.fullname" . }}
+  {{- if not (empty .Values.ingress.class) }}
+  annotations:
+    kubernetes.io/ingress.class: "{{ .Values.ingress.class }}"
+  {{- end }}
+spec:
+  rules:
+  - host: {{ template "konga.name" . }}.{{ .Values.ingress.domain }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ template "konga.fullname" . }}
+          servicePort: 8080
+{{- end -}}

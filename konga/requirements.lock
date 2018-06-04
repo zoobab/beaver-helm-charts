@@ -1,0 +1,6 @@
+dependencies:
+- name: kong
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 0.2.6
+digest: sha256:1262c964666ffce721a7d54189a9910d73b30a4b1e7c8a2d279d1a707ec329f6
+generated: 2018-05-23T19:05:05.619132571+02:00
