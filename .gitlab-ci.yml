@@ -13,5 +13,4 @@ lint:
 package:
   stage: build
   script:
-    - helm package -u -d docs charts/*
-    - helm repo index docs --url https://wildbeavers.github.io/beaver-helm-charts/
+    - ./build.sh
