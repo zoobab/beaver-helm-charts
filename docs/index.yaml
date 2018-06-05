@@ -1,0 +1,69 @@
+apiVersion: v1
+entries:
+  kong-ingress-controller:
+  - apiVersion: v1
+    appVersion: "1"
+    created: 2018-06-05T09:51:33.88444482+02:00
+    description: Kong Ingress controller
+    digest: 5f5f4a14b67d5e19acb3eece4dc6bd80c9fae1c4fd829b072b6ab528fcd1c570
+    home: https://github.com/Kong/kubernetes-ingress-controller/
+    icon: https://s3.amazonaws.com/downloads.kong/universe/assets/icon-kong-inc-large.png
+    keywords:
+    - kong
+    - ingress
+    name: kong-ingress-controller
+    urls:
+    - https://wildbeavers.github.io/beaver-helm-charts/kong-ingress-controller-0.0.4.tgz
+    version: 0.0.4
+  konga:
+  - apiVersion: v1
+    appVersion: "1"
+    created: 2018-06-05T09:51:33.887040458+02:00
+    description: UI for Kong
+    digest: 35e5b5a99e3cbc7f3e629df596ec5096d5c1ed8374c1bbde89af73240812ec3d
+    home: https://github.com/pantsel/konga
+    icon: https://s3.amazonaws.com/downloads.kong/universe/assets/icon-kong-inc-large.png
+    keywords:
+    - kong
+    - ui
+    name: konga
+    urls:
+    - https://wildbeavers.github.io/beaver-helm-charts/konga-0.1.0.tgz
+    version: 0.1.0
+  mariadb-backup:
+  - apiVersion: v1
+    appVersion: "1"
+    created: 2018-06-05T09:51:33.888461522+02:00
+    description: Backup support for official mariadb helm chart
+    digest: dd3a9c1628a20b1c07fa6e3c3733e5485127e63468954c1364e214cdd6280c4a
+    home: https://mariadb.org/
+    icon: https://bitnami.com/assets/stacks/mariadb/img/mariadb-stack-220x234.png
+    keywords:
+    - mariadb
+    - mysql
+    - database
+    - sql
+    - prometheus
+    name: mariadb-backup
+    urls:
+    - https://wildbeavers.github.io/beaver-helm-charts/mariadb-backup-0.1.0.tgz
+    version: 0.1.0
+  postgresql-backup:
+  - apiVersion: v1
+    appVersion: "1"
+    created: 2018-06-05T09:51:33.889737553+02:00
+    description: Backup support for official postgresql helm chart
+    digest: 0df285091b26ec0b8cb3b6d3881c5b161347102a1ef39c2e7150ccc3e762672b
+    home: https://www.postgresql.org/
+    icon: https://www.postgresql.org/media/img/about/press/elephant.png
+    keywords:
+    - postgresql
+    - postgres
+    - database
+    - sql
+    - backup
+    name: postgresql-backup
+    urls:
+    - https://wildbeavers.github.io/beaver-helm-charts/postgresql-backup-0.1.0.tgz
+    version: 0.1.0
+generated: 2018-06-05T09:51:33.882568358+02:00

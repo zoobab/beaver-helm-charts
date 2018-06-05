@@ -3,8 +3,15 @@ image: lachlanevenson/k8s-helm:latest
 
 stages:
   - test
+  - build
 
 lint:
   stage: test
   script:
-    - find . -type d -maxdepth 1 -not -path ./.git -print0 | xargs -0 -n 1 helm lint
+    - find ./charts -type d -maxdepth 1  -not -path ./charts -print0 | xargs -0 -n 1 helm lint
+
+package:
+  stage: build
+  script:
+    - helm package -u -d docs charts/*
+    - helm repo index docs --url https://wildbeavers.github.io/beaver-helm-charts/
