@@ -3,7 +3,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "kong-ingress-controller.fullname" . }}-kong
-  namespace: {{ .Values.Namespace }}
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "kong-ingress-controller.name" . }}
     chart: {{ template "kong-ingress-controller.chart" . }}

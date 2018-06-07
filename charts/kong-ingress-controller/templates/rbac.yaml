@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: {{ template "kong-ingress-controller.fullname" . }}
-  namespace: {{ .Values.Namespace }}
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "kong-ingress-controller.name" . }}
     chart: {{ template "kong-ingress-controller.chart" . }}
@@ -81,7 +81,7 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: Role
 metadata:
   name: kong-ingress-role
-  namespace: {{ .Values.Namespace }}
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "kong-ingress-controller.name" . }}
     chart: {{ template "kong-ingress-controller.chart" . }}
@@ -127,7 +127,7 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
 metadata:
   name: kong-ingress-role-nisa-binding
-  namespace: {{ .Values.Namespace }}
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "kong-ingress-controller.name" . }}
     chart: {{ template "kong-ingress-controller.chart" . }}
@@ -140,7 +140,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ template "kong-ingress-controller.fullname" . }}
-    namespace: {{ .Values.Namespace }}
+    namespace: {{ .Values.namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
@@ -158,4 +158,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ template "kong-ingress-controller.fullname" . }}
-    namespace: {{ .Values.Namespace }}
+    namespace: {{ .Values.namespace }}

@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "kong-ingress-controller.fullname" . }}-ingress
-  namespace: {{ .Values.Namespace }}
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "kong-ingress-controller.name" . }}
     chart: {{ template "kong-ingress-controller.chart" . }}
@@ -24,7 +24,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "kong-ingress-controller.fullname" . }}-ingress
-  namespace: {{ .Values.Namespace }}
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "kong-ingress-controller.name" . }}-ingress
     release: {{ .Release.Name }}
@@ -131,6 +131,7 @@ spec:
               apiVersion: v1
               fieldPath: metadata.name
         - name: POD_NAMESPACE
+          value: {{ .Values.namespace }}
           valueFrom:
             fieldRef:
               apiVersion: v1
