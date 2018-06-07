@@ -6,6 +6,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "kong-ingress-controller.name" . }}
+    component: kong
     chart: {{ template "kong-ingress-controller.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -14,7 +15,8 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "kong-ingress-controller.name" . }}-kong
+        app: {{ template "kong-ingress-controller.name" . }}
+        component: kong
         release: {{ .Release.Name }}
     spec:
       containers:

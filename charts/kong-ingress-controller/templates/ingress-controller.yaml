@@ -7,6 +7,7 @@ metadata:
   labels:
     app: {{ template "kong-ingress-controller.name" . }}
     chart: {{ template "kong-ingress-controller.chart" . }}
+    component: ingress
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -17,7 +18,8 @@ spec:
     targetPort: 8001
     protocol: TCP
   selector:
-    app: {{ template "kong-ingress-controller.name" . }}-ingress
+    app: {{ template "kong-ingress-controller.name" . }}
+    component: ingress
     release: {{ .Release.Name }}
 ---
 apiVersion: apps/v1
@@ -31,7 +33,8 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: {{ template "kong-ingress-controller.name" . }}-ingress
+      app: {{ template "kong-ingress-controller.name" . }}
+      component: ingress
       release: {{ .Release.Name }}
   strategy:
     rollingUpdate:
@@ -45,7 +48,8 @@ spec:
         prometheus.io/port: "10254"
         prometheus.io/scrape: "true"
       labels:
-        app: {{ template "kong-ingress-controller.name" . }}-ingress
+        app: {{ template "kong-ingress-controller.name" . }}
+        component: ingress
         release: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ template "kong-ingress-controller.fullname" . }}
@@ -67,19 +71,19 @@ spec:
         imagePullPolicy: {{ .Values.kong.image.pullPolicy }}
         env:
           - name: KONG_PG_USER
-            value: {{ .Values.postgres.user }}
+            value: {{ .Values.postgres.user | quote }}
           - name: KONG_PG_PASSWORD
-            value: {{ .Values.postgres.password }}
+            value: {{ .Values.postgres.password | quote }}
           - name: KONG_PG_HOST
-            value: {{ template "kong-ingress-controller.name" . }}-postgres
+            value: "{{ template "kong-ingress-controller.name" . }}-postgres"
           - name: KONG_ADMIN_ACCESS_LOG
-            value: /dev/stdout
+            value: "/dev/stdout"
           - name: KONG_ADMIN_ERROR_LOG
-            value: /dev/stderr
+            value: "/dev/stderr"
           - name: KONG_ADMIN_LISTEN
-            value: 0.0.0.0:8001
+            value: "0.0.0.0:8001"
           - name: KONG_PROXY_LISTEN
-            value: 'off'
+            value: "off"
         ports:
         - name: kong-admin
           containerPort: 8001
@@ -102,6 +106,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
+        resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -131,7 +136,6 @@ spec:
               apiVersion: v1
               fieldPath: metadata.name
         - name: POD_NAMESPACE
-          value: {{ .Values.namespace }}
           valueFrom:
             fieldRef:
               apiVersion: v1
@@ -157,6 +161,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
+        resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
       nodeSelector:

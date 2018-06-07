@@ -7,6 +7,7 @@ metadata:
   labels:
     app: {{ template "kong-ingress-controller.name" . }}
     chart: {{ template "kong-ingress-controller.chart" . }}
+    component: postgres
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -16,7 +17,8 @@ spec:
     targetPort: 5432
     protocol: TCP
   selector:
-    app: {{ template "kong-ingress-controller.name" . }}-postgres
+    app: {{ template "kong-ingress-controller.name" . }}
+    component: postgres
     release: {{ .Release.Name }}
 ---
 apiVersion: apps/v1  #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
@@ -29,12 +31,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "kong-ingress-controller.name" . }}-postgres
+      app: {{ template "kong-ingress-controller.name" . }}
+      component: postgres
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "kong-ingress-controller.name" . }}-postgres
+        app: {{ template "kong-ingress-controller.name" . }}
+        component: postgres
         release: {{ .Release.Name }}
     spec:
       containers:
