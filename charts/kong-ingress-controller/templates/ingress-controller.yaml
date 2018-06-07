@@ -20,7 +20,7 @@ spec:
     app: {{ template "kong-ingress-controller.name" . }}-ingress
     release: {{ .Release.Name }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "kong-ingress-controller.fullname" . }}-ingress
