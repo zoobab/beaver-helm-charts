@@ -3,7 +3,7 @@ entries:
   kong-ingress-controller:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-05T10:38:49.330609792+02:00
+    created: 2018-06-07T10:57:19.681725295+02:00
     description: Kong Ingress controller
     digest: 5f5f4a14b67d5e19acb3eece4dc6bd80c9fae1c4fd829b072b6ab528fcd1c570
     home: https://github.com/Kong/kubernetes-ingress-controller/
@@ -18,7 +18,7 @@ entries:
   konga:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-05T10:38:49.332110117+02:00
+    created: 2018-06-07T10:57:19.683165926+02:00
     description: UI for Kong
     digest: ca9f53dd5f55e953480ebce63efc6c546a024d6a13b582729c483dbec00ab872
     home: https://github.com/pantsel/konga
@@ -33,7 +33,7 @@ entries:
   mariadb-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-05T10:38:49.333150301+02:00
+    created: 2018-06-07T10:57:19.683907269+02:00
     description: Backup support for official mariadb helm chart
     digest: dd3a9c1628a20b1c07fa6e3c3733e5485127e63468954c1364e214cdd6280c4a
     home: https://mariadb.org/
@@ -51,7 +51,7 @@ entries:
   postgresql-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-05T10:38:49.33432847+02:00
+    created: 2018-06-07T10:57:19.684664973+02:00
     description: Backup support for official postgresql helm chart
     digest: 0df285091b26ec0b8cb3b6d3881c5b161347102a1ef39c2e7150ccc3e762672b
     home: https://www.postgresql.org/
@@ -66,4 +66,19 @@ entries:
     urls:
     - https://wildbeavers.github.io/beaver-helm-charts/postgresql-backup-0.1.0.tgz
     version: 0.1.0
-generated: 2018-06-05T10:38:49.329441755+02:00
+  staytus:
+  - apiVersion: v1
+    appVersion: "1"
+    created: 2018-06-07T10:57:19.685444777+02:00
+    description: A solution for publishing the status of your services
+    digest: 1cf14c163e770b053767d380c8fef14f52d5544786bf81b407052072f25d1e7a
+    home: https://staytus.co/
+    icon: https://staytus.co/assets/images/logo-white.svg
+    keywords:
+    - status
+    - statuspage
+    name: staytus
+    urls:
+    - https://wildbeavers.github.io/beaver-helm-charts/staytus-0.1.0.tgz
+    version: 0.1.0
+generated: 2018-06-07T10:57:19.681056921+02:00
