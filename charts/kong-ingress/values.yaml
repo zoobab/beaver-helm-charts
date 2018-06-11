@@ -24,7 +24,7 @@ ingress:
 
 postgres:
   postgresUser: kong
-  postgresPassword: random 10 characters
+  postgresPassword:
   postgresDatabase: kong
   persistence:
     enabled: true
@@ -36,9 +36,6 @@ postgres:
     repository: postgres
     tag: 9.5
     pullPolicy: IfNotPresent
-  user: kong
-  password: kong
-  db: kong
 
 customtypes:
   # Enable CustomResourceDefinitions - If you deploy multiple ingress controllers
