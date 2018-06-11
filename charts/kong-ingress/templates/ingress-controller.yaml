@@ -37,6 +37,11 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  selector:
+    matchLabels:
+      app: {{ template "kong-ingress.name" . }}
+      component: ingress
+      release: {{ .Release.Name }}
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -75,7 +80,7 @@ spec:
         imagePullPolicy: {{ .Values.kong.image.pullPolicy }}
         env:
           - name: KONG_PG_USER
-            value: {{ .Values.postgres.user | quote }}
+            value: {{ .Values.postgres.postgresUser | quote }}
           - name: KONG_PG_PASSWORD
             valueFrom:
               secretKeyRef:
