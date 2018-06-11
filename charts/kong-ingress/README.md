@@ -48,6 +48,7 @@ Parameter | Description | Default
 --- | --- | ---
 `replicaCount` | desired number of controller pods | `1`
 `namespace` | controller namespace | `kong`
+`kong.config` | additional [kong.conf](https://github.com/Kong/kong/blob/master/kong.conf.default) flags, automatically converted to environment variables | `{}` |
 `kong.image.repository` | kong container image repository | `kong`
 `kong.image.tag` | kong container image tag | `0.13.1-centos`
 `kong.image.pullPolicy` | kong container image pull policy | `IfNotPresent`

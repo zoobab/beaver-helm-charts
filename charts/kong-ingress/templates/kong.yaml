@@ -73,7 +73,11 @@ spec:
           - name: KONG_PROXY_ERROR_LOG
             value: "/dev/stderr"
           - name: KONG_ADMIN_LISTEN
-            value: 'off'
+            value: "off"
+          {{- range $key, $value := .Values.kong.config }}
+          - name: KONG_{{ $key | upper }}
+            value: {{ $value | quote }}
+          {{- end }}
         ports:
         - name: proxy
           containerPort: 8000
