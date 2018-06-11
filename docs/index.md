@@ -2,7 +2,7 @@
 layout: default
 ---
 
- * [kong-ingress-controller](https://github.com/WildBeavers/beaver-helm-charts/tree/master/charts/kong-ingress-controller/)
+ * [kong-ingress](https://github.com/WildBeavers/beaver-helm-charts/tree/master/charts/kong-ingress/)
  * [konga](https://github.com/WildBeavers/beaver-helm-charts/tree/master/charts/konga/)
  * [mariadb-backup](https://github.com/WildBeavers/beaver-helm-charts/tree/master/charts/mariadb-backup/)
  * [postgresql-backup](https://github.com/WildBeavers/beaver-helm-charts/tree/master/charts/postgresql-backup/)

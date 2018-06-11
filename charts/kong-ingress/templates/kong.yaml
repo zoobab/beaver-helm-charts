@@ -1,25 +1,56 @@
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong-proxy
+  name: {{ template "kong-ingress.fullname" . }}-kong
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "kong-ingress.name" . }}
+    chart: {{ template "kong-ingress.chart" . }}
+    component: kong
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.kong.service.type }}
+  {{- if and (eq .Values.ingress.service.type "LoadBalancer") .Values.ingress.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.ingress.service.loadBalancerIP }}
+  {{- end }}
+  ports:
+  - name: kong-proxy
+    port: {{ .Values.kong.service.http_port }}
+    targetPort: 8000
+    protocol: TCP
+  - name: kong-proxy-ssl
+    port: {{ .Values.kong.service.https_port }}
+    targetPort: 8443
+    protocol: TCP
+  selector:
+    app: {{ template "kong-ingress.name" . }}
+    component: kong
+    release: {{ .Release.Name }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "kong-ingress-controller.fullname" . }}-kong
+  name: {{ template "kong-ingress.fullname" . }}-kong
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ template "kong-ingress-controller.name" . }}
+    app: {{ template "kong-ingress.name" . }}
     component: kong
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   selector:
-    app: {{ template "kong-ingress-controller.name" . }}
+    app: {{ template "kong-ingress.name" . }}
     component: kong
     release: {{ .Release.Name }}
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        app: {{ template "kong-ingress-controller.name" . }}
+        app: {{ template "kong-ingress.name" . }}
         component: kong
         release: {{ .Release.Name }}
     spec:
@@ -33,7 +64,7 @@ spec:
           - name: KONG_PG_PASSWORD
             value: {{ .Values.postgres.password }}
           - name: KONG_PG_HOST
-            value: {{ template "kong-ingress-controller.name" . }}-postgres
+            value: {{ template "kong-ingress.name" . }}-postgres
           - name: KONG_PROXY_ACCESS_LOG
             value: "/dev/stdout"
           - name: KONG_PROXY_ERROR_LOG

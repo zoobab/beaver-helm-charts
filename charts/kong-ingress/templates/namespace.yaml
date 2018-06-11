@@ -4,6 +4,6 @@ kind: Namespace
 metadata:
   name: {{ .Values.namespace }}
   labels:
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}

@@ -1,10 +1,11 @@
+{{ if .Values.customtypes.enabled }}
 ---
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
   name: kongplugins.configuration.konghq.com
   labels:
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -20,7 +21,7 @@ kind: CustomResourceDefinition
 metadata:
   name: kongconsumers.configuration.konghq.com
   labels:
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -36,7 +37,7 @@ kind: CustomResourceDefinition
 metadata:
   name: kongcredentials.configuration.konghq.com
   labels:
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -52,7 +53,7 @@ kind: CustomResourceDefinition
 metadata:
   name: kongingresses.configuration.konghq.com
   labels:
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -62,3 +63,4 @@ spec:
   names:
     kind: KongIngress
     plural: kongingresses
+{{ end }}

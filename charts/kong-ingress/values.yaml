@@ -6,14 +6,32 @@ kong:
     repository: kong
     tag: 0.13.1-centos
     pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    loadBalancerIP: ""
+    http_port: 80
+    https_port: 443
 
 ingress:
   image:
     repository: kong-docker-kubernetes-ingress-controller.bintray.io/kong-ingress-controller
     tag: 0.0.4
     pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    loadBalancerIP: ""
+    port: 8001
 
 postgres:
+  postgresUser: kong
+  postgresPassword: random 10 characters
+  postgresDatabase: kong
+  persistence:
+    enabled: true
+    storageClass: "-"
+  metrics:
+    enabled: false
+
   image:
     repository: postgres
     tag: 9.5
@@ -22,9 +40,10 @@ postgres:
   password: kong
   db: kong
 
-service:
-  type: ClusterIP
-  port: 80
+customtypes:
+  # Enable CustomResourceDefinitions - If you deploy multiple ingress controllers
+  # to your cluster, those have to be deployed only once.
+  enabled: true
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

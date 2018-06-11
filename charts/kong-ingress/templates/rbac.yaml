@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ template "kong-ingress-controller.fullname" . }}
+  name: {{ template "kong-ingress.fullname" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ template "kong-ingress-controller.name" . }}
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    app: {{ template "kong-ingress.name" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 ---
@@ -15,8 +15,8 @@ kind: ClusterRole
 metadata:
   name: kong-ingress-clusterrole
   labels:
-    app: {{ template "kong-ingress-controller.name" . }}
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    app: {{ template "kong-ingress.name" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 rules:
@@ -83,8 +83,8 @@ metadata:
   name: kong-ingress-role
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ template "kong-ingress-controller.name" . }}
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    app: {{ template "kong-ingress.name" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 rules:
@@ -129,8 +129,8 @@ metadata:
   name: kong-ingress-role-nisa-binding
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ template "kong-ingress-controller.name" . }}
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    app: {{ template "kong-ingress.name" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 roleRef:
@@ -139,7 +139,7 @@ roleRef:
   name: kong-ingress-role
 subjects:
   - kind: ServiceAccount
-    name: {{ template "kong-ingress-controller.fullname" . }}
+    name: {{ template "kong-ingress.fullname" . }}
     namespace: {{ .Values.namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -147,8 +147,8 @@ kind: ClusterRoleBinding
 metadata:
   name: kong-ingress-clusterrole-nisa-binding
   labels:
-    app: {{ template "kong-ingress-controller.name" . }}
-    chart: {{ template "kong-ingress-controller.chart" . }}
+    app: {{ template "kong-ingress.name" . }}
+    chart: {{ template "kong-ingress.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 roleRef:
@@ -157,5 +157,5 @@ roleRef:
   name: kong-ingress-clusterrole
 subjects:
   - kind: ServiceAccount
-    name: {{ template "kong-ingress-controller.fullname" . }}
+    name: {{ template "kong-ingress.fullname" . }}
     namespace: {{ .Values.namespace }}
