@@ -77,7 +77,7 @@ spec:
         - name: proxy-ssl
           containerPort: 8443
           protocol: TCP
-          resources:
+        resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
