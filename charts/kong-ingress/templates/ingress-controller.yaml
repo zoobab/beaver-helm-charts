@@ -31,14 +31,12 @@ metadata:
   name: {{ template "kong-ingress.fullname" . }}-ingress
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ template "kong-ingress.name" . }}-ingress
+    app: {{ template "kong-ingress.name" . }}
+    chart: {{ template "kong-ingress.chart" . }}
+    component: ingress
     release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
-  selector:
-    matchLabels:
-      app: {{ template "kong-ingress.name" . }}
-      component: ingress
-      release: {{ .Release.Name }}
   strategy:
     rollingUpdate:
       maxSurge: 1

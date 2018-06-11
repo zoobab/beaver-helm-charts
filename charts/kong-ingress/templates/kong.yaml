@@ -42,10 +42,6 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  selector:
-    app: {{ template "kong-ingress.name" . }}
-    component: kong
-    release: {{ .Release.Name }}
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
