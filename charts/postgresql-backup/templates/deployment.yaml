@@ -27,7 +27,7 @@ spec:
         - name: PGHOARD_BASEBACKUP_COUNT
           value: {{ .Values.backup.basebackup_count | quote }}
         - name: PG_HOST
-          value: {{ .Values.postgresql.name | quote }}
+          value: {{ default .Values.postgresql.name .Values.postgresql.host | quote }}
         - name: PG_PORT
           value: {{ default "5432" .Values.postgresql.port | quote }}
         - name: PG_USER
@@ -35,8 +35,8 @@ spec:
         - name: PG_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.postgresql.name }}
-              key: postgres-password
+              name: {{ default .Values.postgresql.name .Values.postgresql.secret.name }}
+              key: {{ default "postgres-password" .Values.postgresql.secret.key }}
         volumeMounts:
         - name: {{ template "postgresql-backup.fullname" . }}-storage
           mountPath: {{ .Values.backup.directory }}

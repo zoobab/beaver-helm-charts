@@ -5,6 +5,10 @@ image:
 postgresql:
   # Name of the deployed postgresql chart
   name: postgres
+  host:    # Defaults to postgresql.name
+  secret:
+    name:  # Defaults to postgresql.name
+    key:   # Defaults to "postgres-password"
   port: 5432
 
 backup:
