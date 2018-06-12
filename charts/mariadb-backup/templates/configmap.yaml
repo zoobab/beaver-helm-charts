@@ -11,4 +11,4 @@ data:
   clenup-old-files.sh: |
     #!/bin/bash
 
-    find {{ .Values.directory }} -type f -mindepth 1 -mtime +{{ .Values.deleteOldFilesAfter }} -delete
+    find {{ .Values.backup.directory }} -type f -mindepth 1 -mtime +{{ .Values.backup.deleteOldFilesAfter }} -delete

@@ -18,25 +18,28 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Name }}
-        image: camptocamp/pghoard
+        image: "{{ .Values.image.name }}:{{ default "latest" .Values.image.tag }}"
         env:
         - name: PGHOARD_STORAGE_TYPE
-          value: {{ .Values.storage_type | quote }}
+          value: {{ .Values.backup.storage_type | quote }}
         - name: PGHOARD_DIRECTORY
-          value: {{ printf "%s%s" .Values.directory .Release.Namespace | quote }}
+          value: {{ printf "%s%s" .Values.backup.directory .Release.Namespace | quote }}
         - name: PGHOARD_BASEBACKUP_COUNT
-          value: {{ .Values.cleanupAfterDays | quote }}
+          value: {{ .Values.backup.basebackup_count | quote }}
         - name: PG_HOST
-          value: "{{ template "postgresql-backup.fullname" . }}"
+          value: {{ .Values.postgresql.name | quote }}
         - name: PG_PORT
-          value: {{ .Values.postgresql.service.port | quote }}
+          value: {{ default "5432" .Values.postgresql.port | quote }}
         - name: PG_USER
-          value: {{ .Values.user | quote }}
+          value: {{ default "postgres" .Values.postgresql.user | quote }}
         - name: PG_PASSWORD
-          value: {{ .Values.password | quote }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.postgresql.name }}
+              key: postgres-password
         volumeMounts:
         - name: {{ template "postgresql-backup.fullname" . }}-storage
-          mountPath: {{ .Values.directory }}
+          mountPath: {{ .Values.backup.directory }}
       restartPolicy: Always
       volumes:
       {{- if .Values.raw_nfs.enabled }}

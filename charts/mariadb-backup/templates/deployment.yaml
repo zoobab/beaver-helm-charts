@@ -21,25 +21,29 @@ spec:
         image: deitch/mysql-backup
         env:
         - name: DB_DUMP_FREQ
-          value: {{ .Values.freq | quote }}
+          value: {{ .Values.backup.freq | quote }}
         - name: DB_DUMP_BEGIN
-          value: {{ .Values.begin | quote }}
+          value: {{ .Values.backup.begin | quote }}
         - name: DB_DUMP_TARGET
-          value: {{ printf "%s%s" .Values.directory .Release.Namespace | quote }}
+          value: {{ printf "%s%s" .Values.backup.directory .Release.Namespace | quote }}
         - name: DB_SERVER
-          value: "{{ template "mariadb-backup.fullname" . }}"
+          value: {{ .Values.mariadb.name | quote }}
         - name: DB_PORT
           value: "3306"
         - name: DB_USER
-          value: "root"
+          value: {{ .Values.mariadb.user | quote }}
         - name: DB_PASS
           valueFrom:
             secretKeyRef:
-              name: "{{ template "mariadb-backup.fullname" . }}"
+              name: {{ .Values.mariadb.name }}
+              {{- if (eq .Values.mariadb.user "root") }}
               key: mariadb-root-password
+              {{ else }}
+              key: mariadb-password
+              {{- end }}
         volumeMounts:
         - name: {{ template "mariadb-backup.fullname" . }}-storage
-          mountPath: {{ .Values.directory }}
+          mountPath: {{ .Values.backup.directory }}
         - name: "{{ template "mariadb-backup.fullname" . }}-backupconfig-volume"
           mountPath: /scripts.d/post-backup/clenup-old-files.sh
           subPath: clenup-old-files.sh

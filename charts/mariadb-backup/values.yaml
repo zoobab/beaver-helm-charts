@@ -1,9 +1,14 @@
 ---
-directory: /backup/
-freq: 1440
-begin: 2330
-deleteOldFilesAfter: 5
-debug: false
+mariadb:
+  # Name of the deployed MariaDB chart
+  name: mariadb
+  user: root
+
+backup:
+  directory: /backup/
+  freq: 1440
+  begin: 2330
+  deleteOldFilesAfter: 5
 
 # Use nfs mount directly without pv / pvc
 raw_nfs:
@@ -14,6 +19,6 @@ raw_nfs:
 
 # Use claim for backups. `raw_nfs.enabled` should be false
 persistence:
-  enabled: false
+  enabled: true
   storageClassName: manual
   storageSize: 10Gi

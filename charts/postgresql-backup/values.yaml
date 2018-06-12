@@ -1,9 +1,16 @@
-# postgres backup with pghoard
-user: repuser
-password: reppassword
-storage_type: local
-directory: /backup/
-cleanupAfterDays: 5
+image:
+  name: camptocamp/pghoard
+  tag: 9.6
+
+postgresql:
+  # Name of the deployed postgresql chart
+  name: postgres
+  port: 5432
+
+backup:
+  storage_type: local
+  directory: /backup/
+  basebackup_count: 5
 
 # Use nfs mount directly without pv / pvc
 raw_nfs:
@@ -14,9 +21,6 @@ raw_nfs:
 
 # Use claim for backups. `raw_nfs.enabled` should be false
 persistence:
-  enabled: false
+  enabled: true
   storageClassName: manual
   storageSize: 10Gi
-
-postgresql:
-  service: {}
