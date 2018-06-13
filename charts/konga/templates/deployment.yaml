@@ -9,6 +9,11 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
+  selector:
+    matchLabels:
+      app: {{ template "konga.fullname" . }}
+      component: konga
+      release: {{ .Release.Name }}
   replicas: 1
   template:
     metadata:
