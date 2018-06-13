@@ -12,7 +12,7 @@ ingress:
 
 postgres:
   postgresUser: konga
-  postgresPassword:
+  postgresPassword: konga
   postgresDatabase: konga
   persistence:
     enabled: true
