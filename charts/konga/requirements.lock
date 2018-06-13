@@ -1,6 +1,6 @@
 dependencies:
-- name: kong
+- name: postgresql
   repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 0.2.6
-digest: sha256:1262c964666ffce721a7d54189a9910d73b30a4b1e7c8a2d279d1a707ec329f6
-generated: 2018-05-23T19:05:05.619132571+02:00
+  version: 0.12.0
+digest: sha256:ee15c17a379f42b83215bacae4b5778fccdd4f40af2c6aa1ff747f83b3ab75b1
+generated: 2018-06-13T10:23:02.716318022+02:00
