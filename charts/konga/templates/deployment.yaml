@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: {{ template "konga.name" . }}
-        image: 'pantsel/konga'
+        image: '{{ .Values.konga.image.repository }}:{{ .Values.konga.image.tag }}'
         env:
         - name: DB_ADAPTER
           value: "postgres"
