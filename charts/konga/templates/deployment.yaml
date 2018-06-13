@@ -12,13 +12,14 @@ spec:
   selector:
     matchLabels:
       app: {{ template "konga.fullname" . }}
-      component: konga
+      component: ui
       release: {{ .Release.Name }}
   replicas: 1
   template:
     metadata:
       labels:
         app: {{ template "konga.name" . }}
+        component: ui
         release: {{ .Release.Name }}
     spec:
       containers:
