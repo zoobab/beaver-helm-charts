@@ -3,7 +3,7 @@ entries:
   kong-ingress:
   - apiVersion: v1
     appVersion: 0.0.4
-    created: 2018-06-13T11:37:03.520430764+02:00
+    created: 2018-06-13T11:48:09.99758786+02:00
     description: A Kong Ingress controller
     digest: 3676ad81c5ee7ab876bd7071a488937ad32dff55920db54b6822fe3ebfa41da1
     home: https://github.com/Kong/kubernetes-ingress-controller/
@@ -18,7 +18,7 @@ entries:
   konga:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-13T11:37:03.521202164+02:00
+    created: 2018-06-13T11:48:09.998301375+02:00
     description: UI for Kong
     digest: 5829ff3b589084e8fd78d44297b24adbb065cf9c00ab83a34c568d59cb5788c8
     home: https://github.com/pantsel/konga
@@ -33,7 +33,7 @@ entries:
   mariadb-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-13T11:37:03.521474237+02:00
+    created: 2018-06-13T11:48:09.998566543+02:00
     description: Backup support for official mariadb helm chart
     digest: b7c6016f26024a2b7946074c0c9c6ff3ee6e9ff98f4450428375fc8d657e85da
     home: https://mariadb.org/
@@ -51,7 +51,7 @@ entries:
   postgresql-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-13T11:37:03.521739772+02:00
+    created: 2018-06-13T11:48:09.998830436+02:00
     description: Backup support for official postgresql helm chart
     digest: 99bd1d3f62a6201decfb2cf4becc0cf814e90ea482d709178c9efb158b310a2d
     home: https://www.postgresql.org/
@@ -69,7 +69,7 @@ entries:
   staytus:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-13T11:37:03.523639861+02:00
+    created: 2018-06-13T11:48:10.000183749+02:00
     description: A solution for publishing the status of your services
     digest: 5ca1f0b8b2a6ddffb9d73e98ffbf7286b17a2b45af706a117530dc1557fb8ff4
     home: https://staytus.co/
@@ -81,4 +81,4 @@ entries:
     urls:
     - https://wildbeavers.github.io/beaver-helm-charts/staytus-0.1.0.tgz
     version: 0.1.0
-generated: 2018-06-13T11:37:03.519429881+02:00
+generated: 2018-06-13T11:48:09.996524894+02:00
