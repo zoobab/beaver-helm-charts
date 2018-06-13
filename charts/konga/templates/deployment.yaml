@@ -25,14 +25,14 @@ spec:
         - name: DB_DATABASE
           value: "postgres"
         - name: DB_HOST
-          value: {{ .Values.kong.postgresql.fullname | quote }}
+          value: {{ template "konga.fullname" .  }}-postgres
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.kong.postgresql.fullname | quote }}
+              name: {{ template "konga.fullname" . }}-postgresql
               key: postgres-password
         - name: DB_USER
-          value: "kong"
+          value: {{ .Values.postgres.postgresUser }}
         - name: KONGA_BACKEND_PORT
           value: "8080"
         - name: NODE_ENV
