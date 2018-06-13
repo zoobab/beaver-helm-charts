@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: DB_HOST
-              value: {{ .Values.mariadb.host | quote }}
+              value: "{{ template "staytus.fullname" . }}-mariadb"
             - name: DB_DATABASE
               value: {{ .Values.mariadb.db.name | quote }}
             - name: DB_USER
@@ -33,7 +33,7 @@ spec:
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "staytus.fullname" . }}
+                  name: {{ template "staytus.fullname" . }}-mariadb
                   key: mariadb-password
             - name: STAYTUS_SMTP_HOSTNAME
               value: {{ .Values.smtp.host | quote }}
@@ -44,6 +44,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "staytus.fullname" . }}
                   key: smtp-password
+          {{- if .Values.config }}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+          {{- end}}
           ports:
             - name: http
               containerPort: 8787
@@ -58,6 +63,12 @@ spec:
               port: http
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+    {{- if .Values.config }}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ .Values.config }}
+    {{- end }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

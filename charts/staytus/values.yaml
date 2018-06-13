@@ -7,15 +7,17 @@ image:
 
 mariadb:
   db:
-    user:
-    password:
-    name:
+    user: staytus
+    name: staytus
 
 smtp:
   enabled: false
   host: localhost
   user:
   password:
+
+# Name of additional config map, which contains `staytus-initdb.sql`:
+config:
 
 service:
   type: ClusterIP
