@@ -10,5 +10,12 @@ ingress:
   class: ""
   domain: paas-prod01.local.dmz
 
-kong:
-  postgresql: {}
+postgres:
+  postgresUser: konga
+  postgresPassword:
+  postgresDatabase: konga
+  persistence:
+    enabled: true
+    storageClass: "-"
+  metrics:
+    enabled: false
