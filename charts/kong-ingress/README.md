@@ -62,16 +62,16 @@ Parameter | Description | Default
 `ingress.service.type` | type of ingress admin service to create | `NodePort`
 `ingress.service.loadBalancerIP` | IP address to assign to admin service load balancer (if supported) | `""`
 `ingress.service.port` | admin service port | `8001`
-[all postgres values](https://github.com/kubernetes/charts/tree/master/stable/postgresql)
-`postgres.postgresUser` | postgres database user | `kong`
-`postgres.postgresPassword` | postgres database password | `random 10 characters`
-`postgres.postgresDatabase` | postgres database name | `kong`
-`postgres.persistence.enabled` | postgres database persistence | `true`
-`postgres.persistence.storageClass` | postgres storage class | `"-"`
-`postgres.metrics.enabled` | enable Prometheus metrics for postgres | `false`
-`postgres.image.repository` | postgres container image repository | `postgres`
-`postgres.image.tag` | postgres container image tag | `9.5`
-`postgres.image.pullPolicy` | postgres container image pull policy | `IfNotPresent`
+[all postgresql values](https://github.com/kubernetes/charts/tree/master/stable/postgresql)
+`postgresql.postgresUser` | postgresql database user | `kong`
+`postgresql.postgresPassword` | postgresql database password | `random 10 characters`
+`postgresql.postgresDatabase` | postgresql database name | `kong`
+`postgresql.persistence.enabled` | postgresql database persistence | `true`
+`postgresql.persistence.storageClass` | postgresql storage class | `"-"`
+`postgresql.metrics.enabled` | enable Prometheus metrics for postgresql | `false`
+`postgresql.image.repository` | postgresql container image repository | `postgres`
+`postgresql.image.tag` | postgresql container image tag | `9.5`
+`postgresql.image.pullPolicy` | postgresql container image pull policy | `IfNotPresent`
 `customtypes.enabled` | enable CustomResourceDefinitions - If you deploy multiple ingress controllers to your cluster, those have to be deployed only once. | `true`
 `resources` | pod resource requests & limits | `{}`
 `nodeSelector` | node labels for pod assignment | `{}`

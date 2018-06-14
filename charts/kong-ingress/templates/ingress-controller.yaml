@@ -63,14 +63,14 @@ spec:
         imagePullPolicy: {{ .Values.kong.image.pullPolicy }}
         env:
           - name: KONG_PG_USER
-            value: {{ .Values.postgres.postgresUser }}
+            value: {{ .Values.postgresql.postgresUser }}
           - name: KONG_PG_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: {{ template "postgresql.secretName" . }}-postgresql
                 key: postgres-password
           - name: KONG_PG_HOST
-            value: {{ template "kong-ingress.name" . }}-postgres
+            value: {{ template "kong-ingress.name" . }}-postgresql
         command: [ "/bin/sh", "-c", "kong migrations up" ]
       containers:
       - name: {{ .Chart.Name }}-admin-api
@@ -78,14 +78,14 @@ spec:
         imagePullPolicy: {{ .Values.kong.image.pullPolicy }}
         env:
           - name: KONG_PG_USER
-            value: {{ .Values.postgres.postgresUser | quote }}
+            value: {{ .Values.postgresql.postgresUser | quote }}
           - name: KONG_PG_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: {{ template "postgresql.secretName" . }}-postgresql
                 key: postgres-password
           - name: KONG_PG_HOST
-            value: "{{ template "kong-ingress.name" . }}-postgres"
+            value: "{{ template "kong-ingress.name" . }}-postgresql"
           - name: KONG_ADMIN_ACCESS_LOG
             value: "/dev/stdout"
           - name: KONG_ADMIN_ERROR_LOG
