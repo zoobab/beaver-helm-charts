@@ -32,11 +32,6 @@ postgresql:
   metrics:
     enabled: false
 
-  image:
-    repository: postgres
-    tag: 9.5
-    pullPolicy: IfNotPresent
-
 customtypes:
   # Enable CustomResourceDefinitions - If you deploy multiple ingress controllers
   # to your cluster, those have to be deployed only once.
