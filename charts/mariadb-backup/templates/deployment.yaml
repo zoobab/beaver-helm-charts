@@ -55,7 +55,7 @@ spec:
       volumes:
       - name: "{{ template "mariadb-backup.fullname" . }}-backupconfig-volume"
         configMap:
-          name: "{{ template "mariadb-backup.fullname" . }}-backupconfig"
+          name: "{{ template "mariadb-backup.fullname" . }}"
           defaultMode: 0640
       {{- if .Values.raw_nfs.enabled }}
       - name: {{ template "mariadb-backup.fullname" . }}-storage
