@@ -35,6 +35,7 @@ spec:
                 secretKeyRef:
                   name: {{ template "staytus.fullname" . }}-mariadb
                   key: mariadb-password
+          {{- if .Values.smtp.enabled }}
             - name: STAYTUS_SMTP_HOSTNAME
               value: {{ .Values.smtp.host | quote }}
             - name: STAYTUS_SMTP_USERNAME
@@ -44,6 +45,7 @@ spec:
                 secretKeyRef:
                   name: {{ template "staytus.fullname" . }}
                   key: smtp-password
+          {{- end}}
           {{- if .Values.config }}
           volumeMounts:
             - name: config-volume
