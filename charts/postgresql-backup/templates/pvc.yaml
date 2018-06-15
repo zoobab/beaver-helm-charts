@@ -1,4 +1,4 @@
-{{- if .Values.persistence.enabled }}
+{{- if .Values.volume_claim.enabled }}
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -10,10 +10,10 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  storageClassName: {{ .Values.persistence.storageClassName }}
+  storageClassName: {{ .Values.volume_claim.storageClassName }}
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: {{ .Values.persistence.storageSize }}
+      storage: {{ .Values.volume_claim.storageSize }}
 {{end}}

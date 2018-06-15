@@ -65,7 +65,7 @@ spec:
           readOnly: {{ .Values.raw_nfs.readonly }}
       {{- else }}
       - name: {{ template "mariadb-backup.fullname" . }}-storage
-      {{- if .Values.persistence.enabled }}
+      {{- if .Values.volume_claim.enabled }}
         persistentVolumeClaim:
           claimName: {{ template "mariadb-backup.fullname" . }}-claim
       {{- else }}

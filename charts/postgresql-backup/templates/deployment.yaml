@@ -54,7 +54,7 @@ spec:
           readOnly: {{ .Values.raw_nfs.readonly }}
       {{- else }}
       - name: {{ template "postgresql-backup.fullname" . }}-storage
-      {{- if .Values.persistence.enabled }}
+      {{- if .Values.volume_claim.enabled }}
         persistentVolumeClaim:
           claimName: {{ template "postgresql-backup.fullname" . }}-claim
       {{- else }}
