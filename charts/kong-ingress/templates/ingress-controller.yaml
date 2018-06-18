@@ -136,9 +136,9 @@ spec:
         # the kong URL points to the kong admin api server
         - --kong-url=http://localhost:8001
         # the default service is the kong proxy service
-        - --default-backend-service=kong/kong-proxy
+        - --default-backend-service=kong/{{ template "kong-ingress.fullname" . }}-kong
         # Service from were we extract the IP address/es to use in Ingress status
-        - --publish-service=kong/kong-proxy
+        - --publish-service=kong/{{ template "kong-ingress.fullname" . }}-kong
         env:
         - name: POD_NAME
           valueFrom:
