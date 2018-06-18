@@ -1,11 +1,35 @@
 apiVersion: v1
 entries:
+  gitlab-ce:
+  - created: 2018-06-18T12:09:02.933297199+02:00
+    deprecated: true
+    description: GitLab Community Edition
+    digest: e8e75ee1d31f1592da1b1f502d5b117fc8a171767fb45c0af5c6d2f871683884
+    home: https://about.gitlab.com
+    icon: https://gitlab.com/uploads/group/avatar/6543/gitlab-logo-square.png
+    keywords:
+    - git
+    - ci
+    - deploy
+    - issue tracker
+    - code review
+    - wiki
+    maintainers:
+    - email: gtaylor@gc-taylor.com
+      name: Greg Taylor
+    name: gitlab-ce
+    sources:
+    - https://hub.docker.com/r/gitlab/gitlab-ce/
+    - https://docs.gitlab.com/omnibus/
+    urls:
+    - https://wildbeavers.github.io/beaver-helm-charts/gitlab-ce-0.2.2.tgz
+    version: 0.2.2
   kong-ingress:
   - apiVersion: v1
     appVersion: 0.0.4
-    created: 2018-06-18T11:37:41.682129409+02:00
+    created: 2018-06-18T12:09:02.934475137+02:00
     description: A Kong Ingress controller
-    digest: 12756c1dd3f2ad53e409ade5ef2d3b07268de53d0783d5b2a065ae779bd474de
+    digest: 903d7722ecbdc6a2510be7d5c8848c03ee275bf6a640e59c85d45372b7c67485
     home: https://github.com/Kong/kubernetes-ingress-controller/
     icon: https://s3.amazonaws.com/downloads.kong/universe/assets/icon-kong-inc-large.png
     keywords:
@@ -18,7 +42,7 @@ entries:
   konga:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-18T11:37:41.682992704+02:00
+    created: 2018-06-18T12:09:02.935301754+02:00
     description: UI for Kong
     digest: 3fb5a132a6c6e412d4949858b48c61736330e9e81c64e588960e6ab0a70ed965
     home: https://github.com/pantsel/konga
@@ -33,7 +57,7 @@ entries:
   mariadb-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-18T11:37:41.683306395+02:00
+    created: 2018-06-18T12:09:02.935605891+02:00
     description: Backup support for official mariadb helm chart
     digest: 83bbd29b5204f2b93cceab70756bbfecd0de4cc39904b287108e3c8106f39161
     home: https://mariadb.org/
@@ -51,7 +75,7 @@ entries:
   postgresql-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-18T11:37:41.683592632+02:00
+    created: 2018-06-18T12:09:02.935891939+02:00
     description: Backup support for official postgresql helm chart
     digest: 107c12b795c11abc5a10cdeed1ed7b3171493e03470a8b052aa9c117cf80fb9a
     home: https://www.postgresql.org/
@@ -69,7 +93,7 @@ entries:
   staytus:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-18T11:37:41.684641624+02:00
+    created: 2018-06-18T12:09:02.936838654+02:00
     description: A solution for publishing the status of your services
     digest: 81ef1f5bac8c8fa8e57db47117272347c4349739182446e40af46a09c6624543
     home: https://staytus.co/
@@ -81,4 +105,4 @@ entries:
     urls:
     - https://wildbeavers.github.io/beaver-helm-charts/staytus-0.1.0.tgz
     version: 0.1.0
-generated: 2018-06-18T11:37:41.680823064+02:00
+generated: 2018-06-18T12:09:02.930608273+02:00
