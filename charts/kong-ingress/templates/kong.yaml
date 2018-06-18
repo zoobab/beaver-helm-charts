@@ -11,17 +11,23 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   type: {{ .Values.kong.service.type }}
-  {{- if and (eq .Values.ingress.service.type "LoadBalancer") .Values.ingress.service.loadBalancerIP }}
-  loadBalancerIP: {{ .Values.ingress.service.loadBalancerIP }}
+  {{- if and (eq .Values.kong.service.type "LoadBalancer") .Values.ingress.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.kong.service.loadBalancerIP }}
   {{- end }}
   ports:
   - name: kong-proxy
-    port: {{ .Values.kong.service.http_port }}
-    targetPort: 8000
+    {{- if (eq .Values.kong.service.type "NodePort") }}
+    nodePort: {{ default 80 .Values.kong.service.http_port }}
+    {{- end}}
+    port: 80
+    targetPort: 80
     protocol: TCP
   - name: kong-proxy-ssl
-    port: {{ .Values.kong.service.https_port }}
-    targetPort: 8443
+    {{- if (eq .Values.kong.service.type "NodePort") }}
+    nodePort: {{ default 443 .Values.kong.service.https_port }}
+    {{- end}}
+    port: 443
+    targetPort: 443
     protocol: TCP
   selector:
     app: {{ template "kong-ingress.name" . }}
@@ -78,10 +84,10 @@ spec:
           {{- end }}
         ports:
         - name: proxy
-          containerPort: 8000
+          containerPort: 80
           protocol: TCP
         - name: proxy-ssl
-          containerPort: 8443
+          containerPort: 443
           protocol: TCP
         resources:
 {{ toYaml .Values.resources | indent 12 }}
