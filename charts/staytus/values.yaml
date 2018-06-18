@@ -9,6 +9,11 @@ mariadb:
   db:
     user: staytus
     name: staytus
+  master:
+    persistence:
+      size: 200Mi
+  replication:
+    enabled: false
 
 smtp:
   enabled: false

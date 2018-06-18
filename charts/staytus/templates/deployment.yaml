@@ -24,8 +24,13 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+          {{- if .Values.mariadb.replication.enabled }}
+            - name: DB_HOST
+              value: "{{ template "staytus.fullname" . }}-mariadb-master"
+          {{- else }}
             - name: DB_HOST
               value: "{{ template "staytus.fullname" . }}-mariadb"
+          {{- end }}
             - name: DB_DATABASE
               value: {{ .Values.mariadb.db.name | quote }}
             - name: DB_USER
@@ -45,7 +50,7 @@ spec:
                 secretKeyRef:
                   name: {{ template "staytus.fullname" . }}
                   key: smtp-password
-          {{- end}}
+          {{- end }}
           {{- if .Values.config }}
           volumeMounts:
             - name: config-volume
