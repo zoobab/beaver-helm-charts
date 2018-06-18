@@ -3,7 +3,7 @@ entries:
   kong-ingress:
   - apiVersion: v1
     appVersion: 0.0.4
-    created: 2018-06-15T16:17:08.114000808+02:00
+    created: 2018-06-18T08:38:34.007389835+02:00
     description: A Kong Ingress controller
     digest: 5b6d9fb0459a535fc40061038849af25dbcbd272f7406b276d7350775f844ea7
     home: https://github.com/Kong/kubernetes-ingress-controller/
@@ -18,7 +18,7 @@ entries:
   konga:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-15T16:17:08.11478644+02:00
+    created: 2018-06-18T08:38:34.008425876+02:00
     description: UI for Kong
     digest: 3fb5a132a6c6e412d4949858b48c61736330e9e81c64e588960e6ab0a70ed965
     home: https://github.com/pantsel/konga
@@ -33,7 +33,7 @@ entries:
   mariadb-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-15T16:17:08.115088775+02:00
+    created: 2018-06-18T08:38:34.009069929+02:00
     description: Backup support for official mariadb helm chart
     digest: 83bbd29b5204f2b93cceab70756bbfecd0de4cc39904b287108e3c8106f39161
     home: https://mariadb.org/
@@ -51,7 +51,7 @@ entries:
   postgresql-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-15T16:17:08.115403003+02:00
+    created: 2018-06-18T08:38:34.009634148+02:00
     description: Backup support for official postgresql helm chart
     digest: 107c12b795c11abc5a10cdeed1ed7b3171493e03470a8b052aa9c117cf80fb9a
     home: https://www.postgresql.org/
@@ -69,9 +69,9 @@ entries:
   staytus:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-15T16:17:08.116317971+02:00
+    created: 2018-06-18T08:38:34.011887704+02:00
     description: A solution for publishing the status of your services
-    digest: fe7ce106096b67888d90d76697189b248ff8422845ced4ebef9dc133f6e5ace4
+    digest: 96687628b7bdfb77d306d0ab213a16c641fe6ab4fd776ada499cd5fcc946f9d0
     home: https://staytus.co/
     icon: https://staytus.co/assets/images/logo-white.svg
     keywords:
@@ -81,4 +81,4 @@ entries:
     urls:
     - https://wildbeavers.github.io/beaver-helm-charts/staytus-0.1.0.tgz
     version: 0.1.0
-generated: 2018-06-15T16:17:08.112404138+02:00
+generated: 2018-06-18T08:38:34.005841046+02:00
