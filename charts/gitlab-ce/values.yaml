@@ -112,7 +112,7 @@ postgresql:
   memory: 1Gi
 
   postgresUser: gitlab
-  postgresPassword: gitlab
+  # postgresPassword: random 10 characters
   postgresDatabase: gitlab
 
   persistence:
