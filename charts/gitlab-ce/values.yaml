@@ -122,6 +122,7 @@ postgresql:
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/redis/README.md
 ##
 redis:
+  usePassword: false
   resources:
     requests:
       memory: 1Gi
