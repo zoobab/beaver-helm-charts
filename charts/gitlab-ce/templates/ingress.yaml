@@ -1,4 +1,6 @@
 {{- if .Values.ingress.enabled -}}
+{{- $fullName := include "gitlab-ce.fullname" . -}}
+{{- $port := .Values.httpPort -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -20,8 +22,8 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: {{ template "gitlab-ce.fullname" . }}
-          servicePort: {{ .Values.httpPort }}
+          serviceName: {{ $fullName }}
+          servicePort: {{ $port }}
   {{- end }}
 
 {{- if .Values.ingress.tls }}
