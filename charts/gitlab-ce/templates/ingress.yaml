@@ -16,21 +16,12 @@ spec:
   rules:
   {{- range .Values.ingress.hosts }}
   - host: {{ . }}
-    {{- if (not (empty .Values.ingress.tls)) }}
-    https:
-      paths:
-      - path: /
-        backend:
-          serviceName: {{ template "gitlab-ce.fullname" . }}
-          servicePort: {{ .Values.httpsPort }}
-    {{- else }}
     http:
       paths:
       - path: /
         backend:
           serviceName: {{ template "gitlab-ce.fullname" . }}
           servicePort: {{ .Values.httpPort }}
-    {{- end }}
   {{- end }}
 
 {{- if .Values.ingress.tls }}
