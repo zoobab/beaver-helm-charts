@@ -1,10 +1,10 @@
 apiVersion: v1
 entries:
   gitlab-ce:
-  - created: 2018-06-19T15:20:32.047866291+02:00
+  - created: 2018-06-19T15:28:39.72996038+02:00
     deprecated: true
     description: GitLab Community Edition
-    digest: 4216992169ea381308bfdd6f6c16d8cb429b47ed21970c947cfa785c2ab6dba5
+    digest: 0bf452ac3be85a3be52635d7a48edf62d8768c06cf9dda1fac87674d61fefc01
     home: https://about.gitlab.com
     icon: https://gitlab.com/uploads/group/avatar/6543/gitlab-logo-square.png
     keywords:
@@ -27,7 +27,7 @@ entries:
   kong-ingress:
   - apiVersion: v1
     appVersion: 0.0.4
-    created: 2018-06-19T15:20:32.049273688+02:00
+    created: 2018-06-19T15:28:39.73149077+02:00
     description: A Kong Ingress controller
     digest: 903d7722ecbdc6a2510be7d5c8848c03ee275bf6a640e59c85d45372b7c67485
     home: https://github.com/Kong/kubernetes-ingress-controller/
@@ -42,7 +42,7 @@ entries:
   konga:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-19T15:20:32.050414767+02:00
+    created: 2018-06-19T15:28:39.732346898+02:00
     description: UI for Kong
     digest: 3fb5a132a6c6e412d4949858b48c61736330e9e81c64e588960e6ab0a70ed965
     home: https://github.com/pantsel/konga
@@ -57,7 +57,7 @@ entries:
   mariadb-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-19T15:20:32.050890878+02:00
+    created: 2018-06-19T15:28:39.732647859+02:00
     description: Backup support for official mariadb helm chart
     digest: 83bbd29b5204f2b93cceab70756bbfecd0de4cc39904b287108e3c8106f39161
     home: https://mariadb.org/
@@ -75,7 +75,7 @@ entries:
   postgresql-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-19T15:20:32.05133093+02:00
+    created: 2018-06-19T15:28:39.732960861+02:00
     description: Backup support for official postgresql helm chart
     digest: 107c12b795c11abc5a10cdeed1ed7b3171493e03470a8b052aa9c117cf80fb9a
     home: https://www.postgresql.org/
@@ -93,7 +93,7 @@ entries:
   staytus:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-06-19T15:20:32.052952649+02:00
+    created: 2018-06-19T15:28:39.733887033+02:00
     description: A solution for publishing the status of your services
     digest: f60497d9debad618f2d851f1284c35c9de8da385cb34ea6c3f3e1f0f63ec21c9
     home: https://staytus.co/
@@ -105,4 +105,4 @@ entries:
     urls:
     - https://wildbeavers.github.io/beaver-helm-charts/staytus-0.1.0.tgz
     version: 0.1.0
-generated: 2018-06-19T15:20:32.045807044+02:00
+generated: 2018-06-19T15:28:39.72834587+02:00
