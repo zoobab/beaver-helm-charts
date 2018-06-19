@@ -37,7 +37,7 @@ spec:
             secretKeyRef:
               name: {{ template "gitlab-ce.fullname" . }}
               key: gitlab-root-password
-        {{ end }}
+        {{- end }}
         - name: EXTERNAL_URL
           value: {{ default "" .Values.externalUrl | quote }}
         ## DB configuration
@@ -45,15 +45,12 @@ spec:
         - name: DB_HOST
           value: {{ template "gitlab-ce.postgresql.fullname" . }}
         - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "gitlab-ce.fullname" . }}
-              key: db-user
+          value: {{ .Values.postgresql.postgresUser | quote }}
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "gitlab-ce.fullname" . }}
-              key: db-password
+              name: {{ .Release.Name }}-postgresql
+              key: postgres-password
         - name: DB_DATABASE
           value: {{ .Values.postgresql.postgresDatabase | quote }}
         ## Redis configuration

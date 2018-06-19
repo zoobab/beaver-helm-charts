@@ -12,23 +12,25 @@ data:
   ## ref: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-config-template/gitlab.rb.template
   ##
   gitlab_omnibus_config: |
-    external_url '{{ default "" .Values.externalUrl }}'
+    external_url = {{ default "" .Values.externalUrl | quote }}
     postgresql['enable'] = false;
     gitlab_rails['db_host'] = ENV['DB_HOST'];
     gitlab_rails['db_password'] = ENV['DB_PASSWORD'];
     gitlab_rails['db_username'] = ENV['DB_USER'];
-    gitlab_rails['db_database'] = '{{ .Values.postgresql.postgresDatabase }}';
+    gitlab_rails['db_database'] = {{ .Values.postgresql.postgresDatabase | quote }};
     gitlab_rails['db_adapter'] = 'postgresql'
     gitlab_rails['db_encoding'] = 'utf8'
     redis['enable'] = false;
     gitlab_rails['redis_host'] = ENV['REDIS_HOST'];
     gitlab_rails['redis_port'] = '6379'
-    gitlab_rails['initial_shared_runners_registration_token'] = "token"
+    gitlab_rails['initial_shared_runners_registration_token'] = {{ randAlphaNum 64 | b64enc | quote }}
+    {{- if .Values.registryHost }}
     gitlab_rails['registry_enabled'] = true
-    gitlab_rails['registry_host'] = "{{ default "registry.paas-prod01.obi.dmz" .Values.registryHost }}"
-    gitlab_rails['registry_api_url'] = "http://{{ default "registry.paas-prod01.obi.dmz" .Values.registryHost }}"
-    registry['registry_http_addr'] = "{{ default "registry.paas-prod01.obi.dmz" .Values.registryHost }}"
-    gitlab_rails['initial_root_password'] = 'password'
+    gitlab_rails['registry_host'] = {{ .Values.registryHost | quote }}
+    gitlab_rails['registry_api_url'] = "http://{{ .Values.registryHost }}"
+    registry['registry_http_addr'] = {{ .Values.registryHost | quote }}
+    {{- end }}
+    gitlab_rails['initial_root_password'] = {{ .Values.gitlabRootPassword | quote }}
     gitlab_rails['usage_ping_enabled'] = false
     gitlab_monitor['enable'] = true
     prometheus_monitoring['enable'] = true
