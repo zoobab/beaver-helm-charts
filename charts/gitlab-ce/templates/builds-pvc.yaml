@@ -4,12 +4,12 @@ apiVersion: v1
 metadata:
   name: {{ template "gitlab-ce.fullname" . }}-builds
   annotations:
-  {{- if .Values.persistence.gitlabData.storageClass }}
-    volume.beta.kubernetes.io/storage-class: {{ .Values.persistence.gitlabBuilds.storageClass | quote }}
-  {{- else }}
-    volume.alpha.kubernetes.io/storage-class: default
-  {{- end }}
 spec:
+  {{- if .Values.persistence.gitlabData.storageClass }}
+  storageClassName: {{ .Values.persistence.gitlabBuilds.storageClass | quote }}
+  {{- else }}
+  storageClassName: default
+  {{- end }}
   accessModes:
     - {{ .Values.persistence.gitlabBuilds.accessMode | quote }}
   resources:
