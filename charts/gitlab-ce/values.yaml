@@ -29,15 +29,15 @@ serviceType: ClusterIP
 ## Ingress configuration options
 ##
 ingress:
-  annotations:
+  annotations: {}
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
   enabled: false
-  tls:
+  tls: []
       # - secretName: gitlab.cluster.local
       #   hosts:
       #     - gitlab.cluster.local
-  url:
+  hosts: []
 
 ## Configure external service ports
 ## ref: http://kubernetes.io/docs/user-guide/services/
