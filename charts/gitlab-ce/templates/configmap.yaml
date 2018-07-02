@@ -13,6 +13,10 @@ data:
   ##
   gitlab_omnibus_config: |
     external_url = {{ default "" .Values.externalUrl | quote }}
+    gitlab_rails['initial_root_password'] = {{ .Values.gitlabRootPassword | quote }}
+    gitlab_rails['initial_shared_runners_registration_token'] = {{ randAlphaNum 64 | b64enc | quote }}
+
+    # GitLab PostgreSQL
     postgresql['enable'] = false;
     gitlab_rails['db_host'] = ENV['DB_HOST'];
     gitlab_rails['db_password'] = ENV['DB_PASSWORD'];
@@ -20,19 +24,29 @@ data:
     gitlab_rails['db_database'] = {{ .Values.postgresql.postgresDatabase | quote }};
     gitlab_rails['db_adapter'] = 'postgresql'
     gitlab_rails['db_encoding'] = 'utf8'
+
+    # GitLab Redis
     redis['enable'] = false;
     gitlab_rails['redis_host'] = ENV['REDIS_HOST'];
     gitlab_rails['redis_port'] = '6379'
-    gitlab_rails['initial_shared_runners_registration_token'] = {{ randAlphaNum 64 | b64enc | quote }}
+
     {{- if .Values.registryHost }}
+    # Docker Registry
     gitlab_rails['registry_enabled'] = true
     gitlab_rails['registry_host'] = {{ .Values.registryHost | quote }}
     gitlab_rails['registry_api_url'] = "http://{{ .Values.registryHost }}"
     registry['registry_http_addr'] = {{ .Values.registryHost | quote }}
     {{- end }}
-    gitlab_rails['initial_root_password'] = {{ .Values.gitlabRootPassword | quote }}
+
+    # Usage Statistics
     gitlab_rails['usage_ping_enabled'] = false
+
+    # Prometheus
     gitlab_monitor['enable'] = false
     prometheus_monitoring['enable'] = false
     prometheus['listen_address'] = '0.0.0.0:9090'
     node_exporter['enable'] = false
+
+    # Disable group creation for normal users
+    # ref: https://stackoverflow.com/questions/33239048/how-to-prevent-group-creation-in-gitlab
+    gitlab_rails['gitlab_default_can_create_group'] = false
