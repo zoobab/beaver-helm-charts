@@ -110,7 +110,7 @@ persistence:
     ##
     # storageClass:
     accessMode: ReadWriteOnce
-    storageClass: rook-block
+    storageClass: "-"
 
 ## Configuration values for the postgresql dependency.
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
