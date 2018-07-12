@@ -93,6 +93,8 @@ spec:
           mountPath: /var/opt/gitlab/git-data
         - name: gitlab-builds
           mountPath: /var/opt/gitlab/gitlab-ci/builds
+        - name: gitlab-uploads
+          mountPath: /var/opt/gitlab/gitlab-rails/uploads
         - name: gitlab-metrics
           mountPath: /gitlab-metrics
         resources:
@@ -116,6 +118,13 @@ spec:
       {{- if .Values.persistence.gitlabBuilds.enabled }}
         persistentVolumeClaim:
           claimName: {{ template "gitlab-ce.fullname" . }}-builds
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      - name: gitlab-uploads
+      {{- if .Values.persistence.gitlabUploads.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "gitlab-ce.fullname" . }}-uploads
       {{- else }}
         emptyDir: {}
       {{- end }}
