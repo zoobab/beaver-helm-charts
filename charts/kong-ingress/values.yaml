@@ -3,7 +3,7 @@ replicaCount: 1
 kong:
   image:
     repository: kong
-    tag: 0.13.1-centos
+    tag: 0.14.0-centos
     pullPolicy: IfNotPresent
   service:
     type: NodePort
@@ -15,7 +15,7 @@ kong:
 ingress:
   image:
     repository: kong-docker-kubernetes-ingress-controller.bintray.io/kong-ingress-controller
-    tag: 0.0.4
+    tag: 0.0.5
     pullPolicy: IfNotPresent
   service:
     type: NodePort
