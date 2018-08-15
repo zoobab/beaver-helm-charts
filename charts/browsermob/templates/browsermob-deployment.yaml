@@ -1,0 +1,57 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "browsermob.browsermob.fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+spec:
+  replicas: {{ .Values.browsermob.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "browsermob.browsermob.fullname" . }}
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+      annotations:
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.browsermob.image }}:{{ .Values.browsermob.tag }}"
+          imagePullPolicy: {{ .Values.browsermob.pullPolicy }}
+          ports:
+            {{- if .Values.browsermob.jmxPort }}
+            - containerPort: {{ .Values.browsermob.jmxPort }}
+              name: jmx
+              protocol: TCP
+            {{- end }}
+            - containerPort: {{ .Values.browsermob.port }}
+              name: http
+            {{- range $index, $port := .Values.browsermob.proxyPorts  }}
+            - containerPort: {{ $port }}
+              name: proxy-{{ $index }}
+            {{- end }}
+          livenessProbe:
+            httpGet:
+              path: /proxy
+              port: {{ .Values.browsermob.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: {{ .Values.browsermob.livenessTimeout }}
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: {{ default "" .Values.browsermob.javaOpts | quote }}
+            {{- if .Values.hub.timeZone }}
+            - name: TZ
+              value: {{ .Values.browsermob.timeZone | quote }}
+            {{- end }}
+            - name: PORT_RANGE
+              value: {{ index .Values.browsermob.proxyPorts 0 -}} - {{- last .Values.browsermob.proxyPorts }}
+          resources:
+{{ toYaml .Values.browsermob.resources | indent 12 }}
+      nodeSelector:
+{{- if .Values.browsermob.nodeSelector }}
+{{ toYaml .Values.browsermob.nodeSelector | indent 8  }}
+{{- else if .Values.global.nodeSelector }}
+{{ toYaml .Values.global.nodeSelector | indent 8  }}
+{{- end }}

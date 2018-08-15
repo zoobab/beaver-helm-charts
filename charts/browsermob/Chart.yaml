@@ -1,0 +1,13 @@
+name: selenium
+version: 0.1.0
+appVersion: 2.1.4
+description: Chart browsermob-proxy
+keywords:
+- qa
+- proxy
+sources:
+- https://github.com/lightbody/browsermob-proxy
+maintainers:
+- name: Marius Büscher
+  email: marius.buescher@denkwerk.com
+engine: gotpl

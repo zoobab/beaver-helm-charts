@@ -1,0 +1,29 @@
+Browsermob proxy API can be accessed by {{ .Values.browsermob.port }} on the following
+DNS name from within your cluster:
+
+- http://{{ template "browsermob.browsermob.fullname" . }}.{{ .Release.Namespace }}:{{ .Values.browsermob.port }}
+
+The port-range of the possible proxies is {{ first .Values.browsermob.proxyPorts -}} - {{- last .Values.browsermob.proxyPorts }}
+
+You can easily connect to the remote instance from your browser. Forward the
+webserver port to localhost:9090
+
+- kubectl port-forward --namespace {{ .Release.Namespace }} \
+  $(kubectl get pods --namespace {{ .Release.Namespace }} \
+    -l app={{ template "browsermob.browsermob.fullname" . }} \
+    -o jsonpath='{ .items[0].metadata.name }') 9090
+
+You can also connect to the container running Browsermob. To open a shell
+session in the pod run the following:
+
+- kubectl exec -i -t --namespace {{ .Release.Namespace }} \
+  $(kubectl get pods --namespace {{ .Release.Namespace }} \
+    -l app={{ template "browsermob.browsermob.fullname" . }} \
+    -o jsonpath='{.items[0].metadata.name}') /bin/sh
+
+To tail the logs for the Browsermob pod run the following:
+
+- kubectl logs -f --namespace {{ .Release.Namespace }} \
+    $(kubectl get pods --namespace {{ .Release.Namespace }} \
+      -l app={{ template "browsermob.browsermob.fullname" . }} \
+      -o jsonpath='{ .items[0].metadata.name }')
