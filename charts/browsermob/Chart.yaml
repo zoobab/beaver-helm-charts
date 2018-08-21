@@ -1,4 +1,4 @@
-name: selenium
+name: browsermob
 version: 0.1.0
 appVersion: 2.1.4
 description: Chart browsermob-proxy
