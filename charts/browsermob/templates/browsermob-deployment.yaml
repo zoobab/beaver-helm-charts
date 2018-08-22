@@ -41,7 +41,7 @@ spec:
           env:
             - name: JAVA_TOOL_OPTIONS
               value: {{ default "" .Values.browsermob.javaOpts | quote }}
-            {{- if .Values.hub.timeZone }}
+            {{- if .Values.browsermob.timeZone }}
             - name: TZ
               value: {{ .Values.browsermob.timeZone | quote }}
             {{- end }}
