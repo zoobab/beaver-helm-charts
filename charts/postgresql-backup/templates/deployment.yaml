@@ -27,7 +27,7 @@ spec:
         - name: PGHOARD_STORAGE_TYPE
           value: {{ .Values.backup.storage_type | quote }}
         - name: PGHOARD_DIRECTORY
-          value: {{ printf "%s%s" .Values.backup.directory .Release.Namespace | quote }}
+          value: {{ printf "%s/%s/%s" .Values.backup.directory .Release.Namespace .Release.Name | quote }}
         - name: PGHOARD_BASEBACKUP_COUNT
           value: {{ .Values.backup.basebackup_count | quote }}
         - name: PG_HOST
