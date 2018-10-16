@@ -5,7 +5,7 @@ mariadb:
   user: root
 
 backup:
-  directory: /backup/
+  directory: /backup
   freq: 1440
   begin: 2330
   deleteOldFilesAfter: 5
