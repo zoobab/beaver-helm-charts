@@ -48,12 +48,12 @@ spec:
         volumeMounts:
         - name: {{ template "mariadb-backup.fullname" . }}-storage
           mountPath: {{ .Values.backup.directory }}
-        - name: "{{ template "mariadb-backup.fullname" . }}-backupconfig-volume"
+        - name: "{{ template "mariadb-backup.fullname" . }}-conf"
           mountPath: /scripts.d/post-backup/clenup-old-files.sh
           subPath: clenup-old-files.sh
       restartPolicy: Always
       volumes:
-      - name: "{{ template "mariadb-backup.fullname" . }}-backupconfig-volume"
+      - name: "{{ template "mariadb-backup.fullname" . }}-conf"
         configMap:
           name: "{{ template "mariadb-backup.fullname" . }}"
           defaultMode: 0640
