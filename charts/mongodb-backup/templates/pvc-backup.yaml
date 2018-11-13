@@ -1,0 +1,19 @@
+{{- if .Values.volume_claim.enabled }}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "mongodb-backup.fullname" . }}-claim
+  labels:
+    app: {{ template "mongodb-backup.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  storageClassName: {{ .Values.volume_claim.storageClassName }}
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.volume_claim.storageSize }}
+{{end}}

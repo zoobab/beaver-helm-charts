@@ -1,0 +1,29 @@
+image:
+  name: bitnami/mongodb
+#  tag: 3.6
+
+mongodb:
+  releasename:    # Name of the deployed mongodb chart
+  host:    # Defaults to mongodb.name
+  password:
+  user:
+  databasename:
+
+backup:
+  directory: "/backups"
+
+job:
+  schedule: "0 1 * * *"
+  backoffLimit: 2
+# Use nfs mount directly without pv / pvc
+raw_nfs:
+  enabled: false
+  path: /
+  server: nfs.local.dmz
+  readonly: false
+
+# Use claim for backups. `raw_nfs.enabled` should be false
+volume_claim:
+  enabled: false
+  storageClassName: manual
+  storageSize: 1Gi
