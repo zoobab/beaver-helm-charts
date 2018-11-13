@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "mongodb-backup.fullname" . }}
+  labels:
+    app: {{ template "mongodb-backup.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "mongodb-backup.fullname" . }}
+      release: {{ .Release.Name }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "mongodb-backup.fullname" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Release.Name }}
+        image: "{{ .Values.image.name }}:{{ default "latest" .Values.image.tag }}"
+        volumeMounts:
+          - name: {{ template "mongodb-backup.fullname" . }}-storage
+            mountPath: {{ .Values.backup.directory }}
+            subPath: {{ printf "%s/%s/" .Release.Namespace .Release.Name | quote }}
+      restartPolicy: Always
+      volumes:
+      {{- if .Values.raw_nfs.enabled }}
+      - name: {{ template "mongodb-backup.fullname" . }}-storage
+        nfs:
+          path: {{ .Values.raw_nfs.path }}
+          server: {{ .Values.raw_nfs.server }}
+          readOnly: {{ .Values.raw_nfs.readonly }}
+      {{- else }}
+      - name: {{ template "mongodb-backup.fullname" . }}-storage
+      {{- if .Values.volume_claim.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "mongodb-backup.fullname" . }}-claim
+      {{- else }}
+        emptyDir: {}
+      {{- end -}}
+      {{- end -}}
