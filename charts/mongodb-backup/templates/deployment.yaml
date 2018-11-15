@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,6 +22,25 @@ spec:
       containers:
       - name: {{ .Release.Name }}
         image: "{{ .Values.image.name }}:{{ default "latest" .Values.image.tag }}"
+        env:
+        - name: MONGODB_HOST
+          value: "{{ .Values.mongodb.host }}"
+        - name: MONGODB_PORT
+          value: "27017"
+        - name: MONGODB_USER
+          value: "{{ .Values.mongodb.user }}"
+        - name: MONGODB_PASS
+          value: "{{ .Values.mongodb.password }}"
+        - name: MONGODB_DB
+          value: "{{ .Values.mongodb.databasename }}"
+        - name: EXTRA_OPTS
+          value: "--out {{ .Values.backup.directory}}/{{ .Release.Namespace}}/{{ .Release.Name}}/$(date +%d-%m-%Y_%H_%M_%S)"
+        - name: BACKUP_DIRECTORY
+          value: "{{ .Values.backup.directory}}/{{ .Release.Namespace}}/{{ .Release.Name}}"
+        - name: CRON_TIME
+          value: "0 1 * * *"
+        - name: MAX_BACKUPS
+          value: "3"
         volumeMounts:
           - name: {{ template "mongodb-backup.fullname" . }}-storage
             mountPath: {{ .Values.backup.directory }}

@@ -1,6 +1,6 @@
 image:
-  name: bitnami/mongodb
-#  tag: 3.6
+  name: docker-reg.wild-beavers.de/mongodb-backup
+  tag: "4.0"
 
 mongodb:
   releasename:    # Name of the deployed mongodb chart
