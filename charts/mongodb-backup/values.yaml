@@ -12,10 +12,6 @@ mongodb:
 backup:
   directory: "/backups"
 
-job:
-  schedule: "0 1 * * *"
-  backoffLimit: 2
-# Use nfs mount directly without pv / pvc
 raw_nfs:
   enabled: false
   path: /
