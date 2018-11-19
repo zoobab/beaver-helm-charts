@@ -1,5 +1,5 @@
 image:
-  name: docker-reg.wild-beavers.de/mongodb-backup
+  name: docker-reg.wild-beavers.de/devops/kube-deployments/mongodb-backup
   tag: "4.0"
 
 mongodb:
