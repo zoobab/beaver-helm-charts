@@ -35,7 +35,7 @@ spec:
         - name: MONGODB_DB
           value: "{{ .Values.mongodb.databasename }}"
         - name: EXTRA_OPTS
-          value: "--out {{ .Values.backup.directory}}/{{ .Release.Namespace}}/{{ .Release.Name}}/$(date +%d-%m-%Y_%H_%M_%S)"
+          value: "--out {{ .Values.backup.directory}}/{{ .Release.Namespace}}/{{ .Release.Name}}/$(date +%Y_%m_%d_%H_%M_%S)"
         - name: BACKUP_DIRECTORY
           value: "{{ .Values.backup.directory}}/{{ .Release.Namespace}}/{{ .Release.Name}}"
         - name: CRON_TIME
