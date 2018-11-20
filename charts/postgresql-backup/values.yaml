@@ -1,6 +1,6 @@
 image:
   name: camptocamp/pghoard
-  tag: 9.6
+  tag: 10.0
 
 postgresql:
   # Name of the deployed postgresql chart
