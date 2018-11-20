@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   browsermob:
   - appVersion: 2.1.4
-    created: 2018-11-20T11:44:02.535647256+01:00
+    created: 2018-11-20T15:15:32.312106444+01:00
     description: Chart browsermob-proxy
-    digest: 990267d165f176d7571bdd62ba8d8b8138eb1067d5536ee63dff3e1027820a89
+    digest: e57736736f62384ba8f68b384a9b93d0287acb070f2a0edf5d1a43cea78b1056
     engine: gotpl
     keywords:
     - qa
@@ -19,10 +19,10 @@ entries:
     - https://wildbeavers.github.io/beaver-helm-charts/browsermob-0.1.0.tgz
     version: 0.1.0
   gitlab-ce:
-  - created: 2018-11-20T11:44:02.537522029+01:00
+  - created: 2018-11-20T15:15:32.3147823+01:00
     deprecated: true
     description: GitLab Community Edition
-    digest: f1da0ba0e5746160c9d2a2d1237facbf3d2ce32f55d71ad9a2b9b14b34bd8d9b
+    digest: c44c09161011a331f2b3724efc69c212a8e8dd1e8306064bd6f1c3f33f45d566
     home: https://about.gitlab.com
     icon: https://gitlab.com/uploads/group/avatar/6543/gitlab-logo-square.png
     keywords:
@@ -45,9 +45,9 @@ entries:
   kong-ingress:
   - apiVersion: v1
     appVersion: 0.0.5
-    created: 2018-11-20T11:44:02.540196482+01:00
+    created: 2018-11-20T15:15:32.317676203+01:00
     description: A Kong Ingress controller
-    digest: 822cc505bd76b24b4c5d6810f5a6f2dea836caca1938fbac61b502d1ef52b0e4
+    digest: a7b30ddd376d99a172d6ce554b3290c58ccd916e01cdd245d25d5bdce17680c4
     home: https://github.com/Kong/kubernetes-ingress-controller/
     icon: https://s3.amazonaws.com/downloads.kong/universe/assets/icon-kong-inc-large.png
     keywords:
@@ -59,7 +59,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 0.0.4
-    created: 2018-11-20T11:44:02.539259017+01:00
+    created: 2018-11-20T15:15:32.316427475+01:00
     description: A Kong Ingress controller
     digest: 903d7722ecbdc6a2510be7d5c8848c03ee275bf6a640e59c85d45372b7c67485
     home: https://github.com/Kong/kubernetes-ingress-controller/
@@ -74,9 +74,9 @@ entries:
   konga:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-11-20T11:44:02.540914997+01:00
+    created: 2018-11-20T15:15:32.318668931+01:00
     description: UI for Kong
-    digest: 0b124ef6abb3e1d547caca98696c86ac9609fa68b28d615259df1de6ef740c08
+    digest: e0d0fcd62e0b892cc013ef34c2916eb0d6aea4a8174626eba063c46bd3f5ebf3
     home: https://github.com/pantsel/konga
     icon: https://s3.amazonaws.com/downloads.kong/universe/assets/icon-kong-inc-large.png
     keywords:
@@ -89,9 +89,9 @@ entries:
   mariadb-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-11-20T11:44:02.541180819+01:00
+    created: 2018-11-20T15:15:32.319047651+01:00
     description: Backup support for official mariadb helm chart
-    digest: 2ea9bd5fc598bb0612a09ee262038f5a7b7e269e1f563e67dcd19adf456fa418
+    digest: d9a551bdc715d9b12967488541b19e72a1b23cc96e555f6d55df9ceed8361f59
     home: https://mariadb.org/
     icon: https://bitnami.com/assets/stacks/mariadb/img/mariadb-stack-220x234.png
     keywords:
@@ -107,9 +107,9 @@ entries:
   mongodb-backup:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: 2018-11-20T11:44:02.541411209+01:00
+    created: 2018-11-20T15:15:32.319379432+01:00
     description: Backup support for official mongodb helm chart
-    digest: b9ff817253d0ffaafc4efd7352924ba52aa0e96d6f73056aad5941a7e71c53df
+    digest: 5f720c25660cf97c035c1f3d512e18182dad24fc12e0836334c97168183b36c2
     home: https://mongodb.org
     icon: https://bitnami.com/assets/stacks/mongodb/img/mongodb-stack-220x234.png
     keywords:
@@ -124,9 +124,9 @@ entries:
   postgresql-backup:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-11-20T11:44:02.541657542+01:00
+    created: 2018-11-20T15:15:32.319741136+01:00
     description: Backup support for official postgresql helm chart
-    digest: 22c0cd93b09962567d7ab0784548e2fee1683751d3ddfa7d0862f3df18ae4a8c
+    digest: 2a0aa53afd7ebf2c0c255893300479f855f016bb04a92d55b822b9c37c2eb25b
     home: https://www.postgresql.org/
     icon: https://www.postgresql.org/media/img/about/press/elephant.png
     keywords:
@@ -142,9 +142,9 @@ entries:
   staytus:
   - apiVersion: v1
     appVersion: "1"
-    created: 2018-11-20T11:44:02.542902833+01:00
+    created: 2018-11-20T15:15:32.321048384+01:00
     description: A solution for publishing the status of your services
-    digest: 980efb94ca537b4a6dbfac05b6a4728c1211261004ea16dd5aa4e825a82f031d
+    digest: 84b7282416bdc0f4c16b1ababee496c90232a0463bc20cac88c713ae2f343a9f
     home: https://staytus.co/
     icon: https://staytus.co/assets/images/logo-white.svg
     keywords:
@@ -154,4 +154,4 @@ entries:
     urls:
     - https://wildbeavers.github.io/beaver-helm-charts/staytus-0.1.0.tgz
     version: 0.1.0
-generated: 2018-11-20T11:44:02.534815991+01:00
+generated: 2018-11-20T15:15:32.311148449+01:00
