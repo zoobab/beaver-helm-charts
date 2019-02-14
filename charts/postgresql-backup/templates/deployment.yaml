@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "postgresql-backup.fullname" . }}
+  name: {{ .Release.Name }}-backup
   labels:
     app: {{ template "postgresql-backup.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"

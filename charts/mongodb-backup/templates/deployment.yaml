@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "mongodb-backup.fullname" . }}
+  name: {{ .Release.Name }}-backup
   labels:
     app: {{ template "mongodb-backup.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
