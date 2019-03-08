@@ -22,6 +22,15 @@ spec:
         component: ui
         release: {{ .Release.Name }}
     spec:
+      initContainers:
+      - name: wait-for-postgres
+        image: busybox
+        env:
+        - name: KONG_PG_HOST
+          value: {{ template "konga.fullname" .  }}-postgresql
+        - name: KONG_PG_PORT
+          value: "5432"
+        command: [ "/bin/sh", "-c", "until nc -zv $KONG_PG_HOST $KONG_PG_PORT -w1; do echo 'waiting for db'; sleep 1; done" ]
       containers:
       - name: {{ template "konga.name" . }}
         image: '{{ .Values.konga.image.repository }}:{{ .Values.konga.image.tag }}'
@@ -29,20 +38,23 @@ spec:
         - name: DB_ADAPTER
           value: "postgres"
         - name: DB_DATABASE
-          value: "postgres"
+          value: {{ .Values.postgres.postgresDatabase }}
         - name: DB_HOST
-          value: {{ template "konga.fullname" .  }}-postgres
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "konga.fullname" . }}-postgresql
-              key: postgres-password
+          value: {{ template "konga.fullname" .  }}-postgresql
         - name: DB_USER
           value: {{ .Values.postgres.postgresUser }}
+        - name: DB_PASSWORD
+          value: {{ .Values.postgres.postgresPassword }}
+#          valueFrom:
+#            secretKeyRef:
+#              name: {{ template "konga.fullname" . }}-postgresql
+#              key: postgres-password
         - name: KONGA_BACKEND_PORT
-          value: "8080"
+          value: "1337"
         - name: NODE_ENV
           value: "development"
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: "0"
         ports:
         - name: kong-ui
-          containerPort: 8080
+          containerPort: 1337

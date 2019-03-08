@@ -1,14 +1,13 @@
-
 konga:
   image:
     repository: pantsel/konga
-    tag: 0.11.0
+    tag: 0.14.1
     pullPolicy: IfNotPresent
 
 ingress:
   enabled: true
   class: ""
-  domain: paas-prod01.local.dmz
+  domain: zoobab4ever.mycluster.com
 
 postgres:
   postgresUser: konga

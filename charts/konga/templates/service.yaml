@@ -9,8 +9,8 @@ spec:
   type: ClusterIP
   ports:
   - name: {{ template "konga.name" . }}
-    port: 8080
-    targetPort: 8080
+    port: 1337
+    targetPort: 1337
     protocol: TCP
   selector:
     app: {{ template "konga.name" . }}

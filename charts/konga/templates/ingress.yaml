@@ -15,5 +15,5 @@ spec:
       - path: /
         backend:
           serviceName: {{ template "konga.fullname" . }}
-          servicePort: 8080
+          servicePort: 1337
 {{- end -}}
